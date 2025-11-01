@@ -56,11 +56,20 @@ export const experiences: ExperienceItem[] = [
     ],
   },
   {
-    company: "INTELLICURIA Pvt. Ltd.",
+    company: "INTELLICURIA Health AI",
+    role: "Team Lead",
+    startDate: "Aug 2024",
+    endDate: "Jan 2025",
+    location: "Patna Sadar, Bihar, India",
+    type: "",
+    responsibilities: [],
+  },
+  {
+    company: "INTELLICURIA Health AI",
     role: "Full Stack Developer",
     startDate: "January 2024",
-    endDate: "December 2024",
-    location: "Remote",
+    endDate: "Sep 2024",
+    location: "Patna, Bihar, India",
     type: "",
     responsibilities: [
       "Integral part of the development team for an AI-driven clinical support system designed to enhance healthcare decision-making and better patient outcomes.",

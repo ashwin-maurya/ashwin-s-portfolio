@@ -5,7 +5,6 @@ import { Projects } from "@/components/Projects";
 import { Skills } from "@/components/Skills";
 import { Education } from "@/components/Education";
 import { Certifications } from "@/components/Certifications";
-import { PositionOfResponsibility } from "@/components/PositionOfResponsibility";
 import { Languages } from "@/components/Languages";
 import { Footer } from "@/components/Footer";
 
@@ -24,7 +23,6 @@ export default function Home() {
       <Divider />
       <Certifications />
       <Divider />
-      <PositionOfResponsibility />
       <Divider />
       <Languages />
       <Footer />
