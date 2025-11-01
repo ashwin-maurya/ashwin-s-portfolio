@@ -1,15 +1,26 @@
+"use client";
+
 import { Section, SectionTitle } from "./Section";
 import { skills } from "@/lib/data";
+import { motion } from "framer-motion";
 
 interface SkillTagProps {
   readonly skill: string;
+  readonly index: number;
 }
 
-function SkillTag({ skill }: SkillTagProps) {
+function SkillTag({ skill, index }: SkillTagProps) {
   return (
-    <span className="px-3 py-1.5 bg-card border border-border rounded text-sm hover:bg-card-hover transition-colors">
+    <motion.span
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.3, delay: index * 0.02 }}
+      whileHover={{ scale: 1.1 }}
+      className="px-3 py-1.5 bg-card border border-border rounded text-sm hover:bg-card-hover hover:border-accent/50 transition-all cursor-default"
+    >
       {skill}
-    </span>
+    </motion.span>
   );
 }
 
@@ -20,14 +31,19 @@ interface SkillCategoryProps {
 
 function SkillCategory({ title, items }: SkillCategoryProps) {
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
       <h3 className="text-lg font-semibold mb-4 text-muted">{title}</h3>
       <div className="flex flex-wrap gap-2">
-        {items.map((item) => (
-          <SkillTag key={item} skill={item} />
+        {items.map((item, index) => (
+          <SkillTag key={item} skill={item} index={index} />
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -44,4 +60,3 @@ export function Skills() {
     </Section>
   );
 }
-

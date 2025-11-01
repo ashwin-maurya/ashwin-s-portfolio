@@ -1,5 +1,9 @@
+"use client";
+
 import { Section, SectionTitle } from "./Section";
 import { experiences, type ExperienceItem } from "@/lib/data";
+import { motion } from "framer-motion";
+import { SpotlightCard } from "./ui/spotlight-card";
 
 function formatDateRange(startDate: string, endDate: string): string {
   return `${startDate} - ${endDate}`;
@@ -92,17 +96,34 @@ function RoleItem({ role, isLast }: RoleItemProps) {
   const duration = getRoleDuration(role.startDate, role.endDate);
   
   return (
-    <div className="relative flex gap-4 pb-8 last:pb-0">
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="relative flex gap-4 pb-8 last:pb-0"
+    >
       {/* Vertical line and dot */}
       <div className="flex flex-col items-center">
-        <div className="w-2 h-2 rounded-full bg-border mt-1.5"></div>
+        <motion.div
+          initial={{ scale: 0 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.3, delay: 0.2 }}
+          className="w-2 h-2 rounded-full bg-border mt-1.5"
+        />
         {!isLast && (
-          <div className="w-px h-full bg-border mt-2"></div>
+          <motion.div
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="w-px h-full bg-border mt-2"
+          />
         )}
       </div>
       
       {/* Role content */}
-      <div className="flex-1 pb-6">
         <div className="flex flex-col gap-1">
           <h3 className="text-lg font-bold">{role.role}</h3>
           {role.type && (
@@ -113,8 +134,7 @@ function RoleItem({ role, isLast }: RoleItemProps) {
           </p>
           <p className="text-sm text-muted-light">{role.location}</p>
         </div>
-      </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -132,31 +152,44 @@ function CompanyGroup({ company, roles }: CompanyGroupProps) {
     const duration = getRoleDuration(role.startDate, role.endDate);
     
     return (
-      <div className="space-y-2">
-        <div>
-          <h2 className="text-2xl font-bold">{role.role}</h2>
-          <p className="text-sm text-muted-light">
-            {role.company} {role.type && `· ${role.type}`}
-          </p>
-          <p className="text-sm text-muted-light">
-            {formatDateRange(role.startDate, role.endDate)} · {duration}
-          </p>
-          <p className="text-sm text-muted-light">{role.location}</p>
-        </div>
-        {role.responsibilities.length > 0 && (
-          <ul className="list-disc list-inside space-y-2 text-muted ml-2 mt-4">
-            {role.responsibilities.map((responsibility) => (
-              <li key={responsibility}>{responsibility}</li>
-            ))}
-          </ul>
-        )}
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+          <div className="space-y-2 bg-card border border-border rounded-lg p-6 hover:border-accent/50 transition-colors">
+            <div>
+              <h2 className="text-2xl font-bold">{role.role}</h2>
+              <p className="text-sm text-muted-light">
+                {role.company} {role.type && `· ${role.type}`}
+              </p>
+              <p className="text-sm text-muted-light">
+                {formatDateRange(role.startDate, role.endDate)} · {duration}
+              </p>
+              <p className="text-sm text-muted-light">{role.location}</p>
+            </div>
+            {role.responsibilities.length > 0 && (
+              <ul className="list-disc list-inside space-y-2 text-muted ml-2 mt-4">
+                {role.responsibilities.map((responsibility) => (
+                  <li key={responsibility}>{responsibility}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+      </motion.div>
     );
   }
   
   // Multiple roles - show company as main heading with timeline
   return (
-    <div className="space-y-4">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="space-y-4"
+    >
       <div>
         <h2 className="text-2xl font-bold">{company}</h2>
         <p className="text-sm text-muted-light">{totalDuration}</p>
@@ -174,15 +207,21 @@ function CompanyGroup({ company, roles }: CompanyGroupProps) {
       
       {/* Show responsibilities from the most recent role if available */}
       {roles[0]?.responsibilities && roles[0].responsibilities.length > 0 && (
-        <div className="ml-6 mt-4">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="ml-6 mt-4"
+        >
           <ul className="list-disc list-inside space-y-2 text-muted">
             {roles[0].responsibilities.map((responsibility) => (
               <li key={responsibility}>{responsibility}</li>
             ))}
           </ul>
-        </div>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }
 
