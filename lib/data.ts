@@ -173,10 +173,15 @@ export const certifications: Certification[] = [
     link: "https://www.udemy.com/certificate/UC-f07f4d9e-5f1c-4bda-90a1-d9ad2fad2115/",
   },
   {
+    name: "Figma",
+    issuer: "Udemy",
+    link: "https://www.udemy.com/certificate/UC-20db38c2-45c7-4b40-be68-8b30488d791f/",
+  },
+  {
     name: "WordPress Developer + Code",
     issuer: "Udemy",
     link: "https://www.udemy.com/certificate/UC-541fd8db-58ca-4f7d-9656-549bd40b2db2/",
-  },
+  }, 
 ];
 
 export interface PositionOfResponsibility {
